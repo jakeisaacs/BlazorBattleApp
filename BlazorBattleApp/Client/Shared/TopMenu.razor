@@ -1,0 +1,20 @@
+﻿<div class="top-menu">
+    <img src="icons/gold-coin-icon.jpg" />
+    <span class="popover-header">
+        @Currency
+    </span>
+    
+    <AddCurrency CurrencyAdded="AddCurrency"/>
+</div>
+
+
+@code {
+    [Parameter]
+    public int Currency { get; set; } = 100;
+
+    public void AddCurrency(int value)
+    {
+        Currency += value;
+    }
+}
+

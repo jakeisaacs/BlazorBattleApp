@@ -1,0 +1,11 @@
+﻿<button @onclick="IncreaseCurrencyCount" class="btn btn-info"><span class="oi oi-plus"></span></button>
+
+@code {
+    [Parameter]
+    public EventCallback<int> CurrencyAdded { get; set; }
+
+    public async Task IncreaseCurrencyCount()
+    {
+        await CurrencyAdded.InvokeAsync(5);
+    }
+}

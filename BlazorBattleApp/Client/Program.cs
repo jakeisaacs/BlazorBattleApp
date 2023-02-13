@@ -1,4 +1,5 @@
 using BlazorBattleApp.Client;
+using BlazorBattleApp.Client.Services;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 
@@ -11,6 +12,8 @@ internal class Program
         builder.RootComponents.Add<HeadOutlet>("head::after");
 
         builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
+        builder.Services.AddScoped<ICurrencyServices, CurrencyServices>();
+        builder.Services.AddScoped<IUnitService, UnitService>();
 
         await builder.Build().RunAsync();
     }

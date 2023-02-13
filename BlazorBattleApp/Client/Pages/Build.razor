@@ -1,0 +1,13 @@
+﻿@page "/build"
+@inject ICurrencyServices CurrencyService
+
+<h3>Build</h3>
+
+<button class="btn btn-primary" @onclick="() => ConsumeCurrency(10)">Consume Currency</button>
+
+@code {
+    private void ConsumeCurrency(int amount)
+    {
+        CurrencyService.ConsumeCurrency(amount);
+    }
+}

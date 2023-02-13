@@ -1,20 +1,26 @@
-﻿<div class="top-menu">
+﻿@inject ICurrencyServices CurrencyService
+@implements IDisposable
+
+<div class="top-menu">
     <img src="icons/gold-coin-icon.jpg" />
     <span class="popover-header">
-        @Currency
+        @CurrencyService.Currency
     </span>
     
-    <AddCurrency CurrencyAdded="AddCurrency"/>
+    <AddCurrency />
 </div>
 
 
 @code {
-    [Parameter]
-    public int Currency { get; set; } = 100;
 
-    public void AddCurrency(int value)
+    protected override void OnInitialized()
     {
-        Currency += value;
+        CurrencyService.OnChange += StateHasChanged;
+    }
+
+    public void Dispose()
+    {
+        CurrencyService.OnChange -= StateHasChanged;
     }
 }
 

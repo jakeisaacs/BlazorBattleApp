@@ -11,6 +11,6 @@ namespace BlazorBattleApp.Client.Services
         IList<Unit> Units { get; }
         IList<UserUnit> MyUnits { get; set; }
 
-        void addUnits(int unitId);
+        void AddUnit(int unitId);
     }
 }

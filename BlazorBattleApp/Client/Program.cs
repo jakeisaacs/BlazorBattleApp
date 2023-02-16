@@ -2,6 +2,7 @@ using BlazorBattleApp.Client;
 using BlazorBattleApp.Client.Services;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
+using Blazored.Toast;
 
 internal class Program
 {
@@ -11,6 +12,7 @@ internal class Program
         builder.RootComponents.Add<App>("#app");
         builder.RootComponents.Add<HeadOutlet>("head::after");
 
+        builder.Services.AddBlazoredToast();
         builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
         builder.Services.AddScoped<ICurrencyServices, CurrencyServices>();
         builder.Services.AddScoped<IUnitService, UnitService>();

@@ -1,13 +1,45 @@
 ﻿@page "/build"
 @inject ICurrencyServices CurrencyService
+@inject IUnitService UnitService
+@inject IToastService ToastService
 
 <h3>Build</h3>
 
-<button class="btn btn-primary" @onclick="() => ConsumeCurrency(10)">Consume Currency</button>
+<div class="form-group">
+    <select @bind="selectedUnitId" class="form-control">
+        @foreach (var unit in UnitService.Units)
+        {
+            <option value="@unit.Id">@unit.Title // @unit.CurrencyCost Coins</option>
+        }
+    </select>
+</div>
+
+<button class="btn btn-primary" @onclick="BuildUnit">Build</button>
+
+@if (notEnoughCurrency)
+{
+    <div class="validation-message">
+        Not enough coins! 
+    </div>
+}
 
 @code {
-    private void ConsumeCurrency(int amount)
+    int selectedUnitId = 1;
+    bool notEnoughCurrency = false;
+
+    public void BuildUnit()
     {
-        CurrencyService.ConsumeCurrency(amount);
+        var selectedUnit = UnitService.Units.FirstOrDefault(unit => unit.Id == selectedUnitId);
+
+        if (CurrencyService.Currency < selectedUnit.CurrencyCost)
+        {
+            notEnoughCurrency = true;
+            ToastService.ShowError("Not enough coins!");
+            return;
+        }
+        else notEnoughCurrency = false;
+
+        CurrencyService.ConsumeCurrency(selectedUnit.CurrencyCost);
+        UnitService.AddUnit(selectedUnitId);
     }
 }

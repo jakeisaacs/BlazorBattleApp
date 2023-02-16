@@ -12,7 +12,7 @@ namespace BlazorBattleApp.Shared
         public string Title { get; set; }
         public int Attack { get; set; }
         public int Defense { get; set;}
-        public int Hitpoints { get; set; }
+        public int HitPoints { get; set; } = 100;
         public int CurrencyCost { get; set; } 
     }
 }

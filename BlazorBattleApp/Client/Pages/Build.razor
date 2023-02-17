@@ -16,12 +16,12 @@
 
 <button class="btn btn-primary" @onclick="BuildUnit">Build</button>
 
-@if (notEnoughCurrency)
+@*@if (notEnoughCurrency)
 {
     <div class="validation-message">
         Not enough coins! 
     </div>
-}
+}*@
 
 @code {
     int selectedUnitId = 1;
@@ -37,7 +37,6 @@
             ToastService.ShowError("Not enough coins!");
             return;
         }
-        else notEnoughCurrency = false;
 
         CurrencyService.ConsumeCurrency(selectedUnit.CurrencyCost);
         UnitService.AddUnit(selectedUnitId);
